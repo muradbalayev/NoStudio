@@ -120,7 +120,7 @@ const TeamMembers = () => {
   // Create state to track which team member card is being hovered
   const [hoveredId, setHoveredId] = useState(null);
   return (
-    <section className="py-20 px-4 relative min-h-screen bg-[#17181a] text-white">
+    <section className="py-20 px-4 relative bg-[#17181a] text-white">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

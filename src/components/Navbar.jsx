@@ -68,7 +68,7 @@ const Navbar = () => {
           <PixelButton
             className={`px-4 py-2 ${
               scrolled ? "bg-green-600 text-white" : "bg-white text-[#179a5b]"
-            } text-xs border-b-2 border-r-2 border-green-800 hover:bg-green-600 hover:text-white transition-colors`}
+            } sm:block hidden text-xs border-b-2 border-r-2 border-green-800 hover:bg-green-600 hover:text-white transition-colors`}
             particleCount={8}
             particleSize={3}
           >
