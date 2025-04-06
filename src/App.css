@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Press Start 2P', cursive;
+  image-rendering: pixelated;
+}
+
+body {
+  background-color: #dedede;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.text-green{
+  color: #17985a;
+}
+
+.bg-green{
+  background-color: #179a5b;
+}
+
+.border-green{
+  border-color: #179a5b;
+}
+
+/* Pixel Art Styling */
+.pixel-shadow {
+  text-shadow: 3px 3px 0 #000;
+}
+
+.pixel-button {
+  image-rendering: pixelated;
+  font-family: 'Press Start 2P', cursive;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.1s ease;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.pixel-button:active {
+  transform: translate(2px, 2px);
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
+
+/* Particle effects */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.particle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 100;
+  image-rendering: pixelated;
+  will-change: transform, opacity;
+}
+
+.pixel-card {
+  position: relative;
+  transition: all 0.2s ease;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.pixel-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+.pixel-icon {
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 0 #000;
+}
+
+/* Pixelated background effect */
+.pixel-art-container {
+  position: relative;
+}
+
+.pixel-art-container::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAEklEQVQImWNgYGD4z/D/////AA4EBAGEaRX5AAAASUVORK5CYII=');
+  background-size: 2px 2px;
+  opacity: 0.1;
+  z-index: 1000;
+}
