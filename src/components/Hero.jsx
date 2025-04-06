@@ -81,7 +81,7 @@ const Hero = ({ scrollYProgress }) => {
         <div className="relative z-10 flex flex-col items-center justify-center h-full px-4">
           <motion.div
             style={{ y: textY, opacity }}
-            className="w-full max-w-7xl mx-auto flex flex-col items-center md:items-start justify-center"
+            className="w-full max-w-7xl sm:px-6 px-3 mx-auto flex flex-col items-center md:items-start justify-center"
           >
             {/* Main title with letter animations */}
             <div className="mb-4 overflow-hidden">
@@ -95,7 +95,7 @@ const Hero = ({ scrollYProgress }) => {
                     key={index}
                     custom={index}
                     variants={letterVariants}
-                    className="text-4xl sm:text-7xl md:text-9xl font-bold text-green pixel-shadow inline-block"
+                    className="text-4xl sm:text-7xl lg:text-9xl font-bold text-green pixel-shadow inline-block"
                     style={{
                       textShadow: "4px 4px 0px rgba(0,0,0,0.2)",
                       transform: "skew(-5deg)",

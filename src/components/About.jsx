@@ -163,7 +163,7 @@ const About = ({ scrollYProgress }) => {
               </motion.div>
             </div>
             <div className="md:w-1/2 p-8">
-              <div>
+              <div className="sm:text-start text-center">
                 {latestProjectWords.map((word, index) => (
                   <motion.h4
                     key={index}
