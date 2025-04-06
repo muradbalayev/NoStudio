@@ -116,26 +116,46 @@ const itemVariants = {
   },
 };
 
+const title = 'Our Team'
+const titleWords  = title.split(' ')
+const description = "Meet the talented individuals behind NoStudio's pixel perfect gaming experiences."
+const descriptionWords = description.split(' ');
+
 const TeamMembers = () => {
   // Create state to track which team member card is being hovered
   const [hoveredId, setHoveredId] = useState(null);
   return (
     <section className="py-20 px-4 relative bg-[#17181a] text-white">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true, amount: 0.2 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 pixel-shadow">
-            Our <span className="text-green">Team</span>
-          </h2>
-          <p className="text-lg max-w-2xl mx-auto text-gray-300">
-            Meet the talented individuals behind NoStudio's pixel perfect gaming experiences.
-          </p>
-        </motion.div>
+        <div className="text-center mb-16">
+          <div>
+
+            {titleWords.map((word, index) => (
+              <motion.h2
+                key={index}
+                initial={{ filter: "blur(10px)", opacity: 0, y: 30 }}
+                whileInView={{ filter: "blur(0)", opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                viewport={{ once: true, amount: 0.2 }}
+                className="inline-block first:mr-1.5 text-4xl md:text-5xl font-bold mb-4 pixel-shadow"
+              >
+                {word}
+              </motion.h2>
+            ))}
+ </div>
+          {descriptionWords.map((word, index) => (
+              <motion.h2
+                key={index}
+                initial={{ filter: "blur(10px)", opacity: 0, y: 30 }}
+                whileInView={{ filter: "blur(0)", opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: index * 0.1 , ease: [0.25, 0.1, 0.25, 1]}}
+                viewport={{ once: true, amount: 0.2 }}
+                className="inline-block mr-2  text-lg max-w-2xl mx-auto text-gray-300"
+              >
+                {word}
+              </motion.h2>
+            ))}
+        </div>
 
         <motion.div
           variants={containerVariants}

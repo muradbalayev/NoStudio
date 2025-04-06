@@ -24,31 +24,29 @@ const Navbar = () => {
     };
   }, []);
 
-  
-  
-    useEffect(() => {
-      const checkMobile = () => {
-        setIsMobile(window.innerWidth < 768);
-      };
-    
-      checkMobile();
-    
-      window.addEventListener("resize", checkMobile);
-    
-      return () => window.removeEventListener("resize", checkMobile);
-    }, []);
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 w-full`}
+      className={`absolute top-0 left-0 right-0 z-50 w-full`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
       style={{ willChange: "transform" }}
     >
-      <div className={`mx-auto sm:px-10 px-4 transition-all duration-300 ${
-        scrolled || isMobile ? "py-6 bg-white shadow-md" : "py-8 bg-transparent"
-      }`}>
+      <div
+        className={`mx-auto sm:px-10 px-4 transition-all duration-300 sm:py-8 py-6 bg-transparent`}
+      >
         <div className="flex justify-between items-center max-w-[1440px] mx-auto">
           {/* Logo */}
           <motion.div
@@ -58,9 +56,7 @@ const Navbar = () => {
             style={{ willChange: "transform" }}
           >
             <span
-              className={`${
-                scrolled || isMobile ? "text-[#1e941e]" : "text-white"
-              } pixel-shadow`}
+              className={`text-white pixel-shadow`}
             >
               NOSTUDIO
             </span>
@@ -71,20 +67,18 @@ const Navbar = () => {
             {/* <NavLink text="HOME" active={true} scrolled={scrolled} />
             <NavLink text="BLOG" active={false} scrolled={scrolled} /> */}
             <Links
-              className={` transition-all duration-300 rounded-full ${!scrolled ? "text-white" : "text-[#1e941e]"}`}
+              className={` transition-all duration-300 rounded-full text-white`}
               text="HOME"
             />
             <Links
-              className={` transition-all duration-300 rounded-full ${!scrolled ? "text-white" : "text-[#1e941e]"}`}
+              className={` transition-all duration-300 rounded-full text-white`}
               text="BLOG"
             />
           </div>
 
           {/* Right Side - Contact Button */}
           <PixelButton
-            className={`px-4 py-2 ${
-              scrolled ? "bg-green-600 text-white" : "bg-white text-[#179a5b]"
-            } sm:block hidden text-xs border-b-2 border-r-2 border-green-800 hover:bg-green-600 hover:text-white transition-colors`}
+            className={`px-4 py-2 bg-white text-green-600 sm:block hidden text-xs border-b-2 border-r-2 border-green-800 hover:bg-green-600 hover:text-white transition-colors`}
             particleCount={8}
             particleSize={3}
           >

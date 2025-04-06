@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import heroImg from "../assets/hero2.gif";
 import { motion, useSpring, useTransform } from "framer-motion";
 import PixelButton from "./common/PixelButton";
@@ -32,29 +32,41 @@ const letterVariants = {
 };
 
 const Hero = ({ scrollYProgress }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const smoothScrollYProgress = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 20,
     restDelta: 0.001,
   });
 
-  const scale = useTransform(smoothScrollYProgress, [0, 1], [1, 1.2]);
-  const rotate = useTransform(smoothScrollYProgress, [0, 0.7], [0, -5]);
+  const scale = useTransform(smoothScrollYProgress, [0, 1], [1, isMobile? 1: 1.2]);
+  const rotate = useTransform(smoothScrollYProgress, [0, 0.7], [0, isMobile? 0 : -5]);
   const textY = useTransform(smoothScrollYProgress, [0.2, 0.6], [0, -120]);
   const opacity = useTransform(smoothScrollYProgress, [0.6, 1], [1, 0.4]);
   const rotateButton = useTransform(smoothScrollYProgress, [0.2, 1], [0, 90]);
   const ButtonX = useTransform(smoothScrollYProgress, [0.2, 1], [0, 110]);
   const ButtonY = useTransform(smoothScrollYProgress, [0.2, 1], [0, -300]);
-  
+
   // Split text for letter-by-letter animation
   const titleText = "NOSTUDIO";
   const titleLetters = Array.from(titleText);
-  
-
 
   return (
     <motion.div
-    //   style={{ scale, rotate }}
+      style={{ willChange: "transform", scale, rotate }}
       className="sticky top-0 h-screen mx-auto overflow-hidden"
     >
       <motion.header
@@ -67,13 +79,13 @@ const Hero = ({ scrollYProgress }) => {
         }}
       >
         <div className="relative z-10 flex flex-col items-center justify-center h-full px-4">
-          <motion.div 
+          <motion.div
             style={{ y: textY, opacity }}
             className="w-full max-w-7xl mx-auto flex flex-col items-center md:items-start justify-center"
           >
             {/* Main title with letter animations */}
             <div className="mb-4 overflow-hidden">
-              <motion.div 
+              <motion.div
                 initial="hidden"
                 animate="visible"
                 className="flex flex-wrap justify-center md:justify-start"
@@ -84,10 +96,10 @@ const Hero = ({ scrollYProgress }) => {
                     custom={index}
                     variants={letterVariants}
                     className="text-4xl sm:text-7xl md:text-9xl font-bold text-green pixel-shadow inline-block"
-                    style={{ 
+                    style={{
                       textShadow: "4px 4px 0px rgba(0,0,0,0.2)",
                       transform: "skew(-5deg)",
-                      willChange: "transform, text-shadow"
+                      willChange: "transform, text-shadow",
                     }}
                   >
                     {letter}
@@ -95,9 +107,9 @@ const Hero = ({ scrollYProgress }) => {
                 ))}
               </motion.div>
             </div>
-            
+
             {/* Tagline with reveal animation */}
-            <motion.p 
+            <motion.p
               custom={1}
               variants={textVariants}
               initial="hidden"
@@ -109,7 +121,7 @@ const Hero = ({ scrollYProgress }) => {
 
             {/* Button with animation */}
             <motion.div
-            // style={{ rotate: rotateButton, x: ButtonX, y: ButtonY }}
+              // style={{ rotate: rotateButton, x: ButtonX, y: ButtonY }}
               custom={2}
               variants={textVariants}
               initial="hidden"
