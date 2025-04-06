@@ -54,7 +54,7 @@ const Hero = ({ scrollYProgress }) => {
 
   return (
     <motion.div
-      style={{ scale, rotate }}
+    //   style={{ scale, rotate }}
       className="sticky top-0 h-screen mx-auto overflow-hidden"
     >
       <motion.header

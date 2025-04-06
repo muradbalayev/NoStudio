@@ -28,14 +28,14 @@ const HomePage = () => {
 
   return (
     <motion.div
-    ref={wrapper}
-      className="pixel-art-container "
+      ref={wrapper}
+      className="pixel-art-container"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
          {/* Pixel Art Motor Progress Indicator */}
-         <div className="fixed pointer-events-none top-8 -left-5 -right-5 h-12 z-[60] overflow-hidden">
+         <div className="fixed pointer-events-none bottom-0 border-green-800 -left-5 -right-5 sm:h-16 h-12 z-[1000] overflow-hidden">
            <div className="relative w-full h-full bg-transparent">
              <motion.div 
                className="absolute top-0 bottom-0 flex items-center"
@@ -47,7 +47,7 @@ const HomePage = () => {
                <img 
                  src={motorGif} 
                  alt="Pixel Art Motor" 
-                 className="h-12 w-auto object-contain"
+                 className="h-12 sm:h-16 w-auto object-contain"
                  style={{ imageRendering: "pixelated" }}
                />
              </motion.div>

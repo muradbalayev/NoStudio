@@ -5,6 +5,7 @@ import Links from "./common/Links";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Handle scroll effect for navbar
   useEffect(() => {
@@ -23,15 +24,30 @@ const Navbar = () => {
     };
   }, []);
 
+  
+  
+    useEffect(() => {
+      const checkMobile = () => {
+        setIsMobile(window.innerWidth < 768);
+      };
+    
+      checkMobile();
+    
+      window.addEventListener("resize", checkMobile);
+    
+      return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 `}
+      className={`fixed top-0 left-0 right-0 z-50 w-full`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      style={{ willChange: "transform" }}
     >
       <div className={`mx-auto sm:px-10 px-4 transition-all duration-300 ${
-        scrolled ? "py-4 bg-white shadow-md" : "py-6 bg-transparent"
+        scrolled || isMobile ? "py-6 bg-white shadow-md" : "py-8 bg-transparent"
       }`}>
         <div className="flex justify-between items-center max-w-[1440px] mx-auto">
           {/* Logo */}
@@ -43,7 +59,7 @@ const Navbar = () => {
           >
             <span
               className={`${
-                scrolled ? "text-[#1e941e]" : "text-white"
+                scrolled || isMobile ? "text-[#1e941e]" : "text-white"
               } pixel-shadow`}
             >
               NOSTUDIO

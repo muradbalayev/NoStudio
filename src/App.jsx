@@ -19,34 +19,41 @@ function App() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
   
-    useEffect( () => {
-      const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Ease out expo
+  useEffect(() => {
+    let lenis = null;
+    
+    // Only initialize Lenis if not on mobile
+    if (!isMobile) {
+      lenis = new Lenis({
+        duration: 0.8, 
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -8 * t)), // Daha yumşaq easing (eksponent dəyər -8 əvəzinə -10)
         direction: 'vertical',
         gestureOrientation: 'vertical',
         smoothWheel: true,
-        wheelMultiplier: 1,
+        wheelMultiplier: 1.1, // Wheel multiplier azaldıldı, sürətli scroll zamanı yük azalsın
         smoothTouch: false,
         touchMultiplier: 2,
-      })
+        infinite: false,
+        autoResize: true, // AutoResize söndürülür, bəzən əlavə reflow-lar performansı aşağı sala bilər
+      });
   
-      // Make lenis available globally
       window.lenis = lenis;
   
       function raf(time) {
-        lenis.raf(time)
-        requestAnimationFrame(raf)
+        lenis.raf(time);
+        requestAnimationFrame(raf);
       }
+      requestAnimationFrame(raf);
+    }
   
-      requestAnimationFrame(raf)
-      
-      return () => {
-        // Clean up
+    return () => {
+      if (lenis) {
+        lenis.destroy();
         window.lenis = null;
-      };
-    }, [])
-
+      }
+    };
+  }, [isMobile]); 
+  
   return (
     <>
     <HomePage/>

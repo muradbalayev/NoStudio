@@ -26,10 +26,12 @@ const About = ({ scrollYProgress }) => {
       });
       
   const scale = useTransform(smoothScrollYProgress, [0, isMobile ? 0.2 : 0.7], [0.8, 1]);
-  const rotate = useTransform(smoothScrollYProgress, [0, isMobile ? 0.2 : 0.7], [-5, 0]);
+  const rotate = useTransform(smoothScrollYProgress, [0, isMobile ? 0.2 : 0.7], [isMobile ? 0 : -5, 0]);
 
   return (
-    <motion.section className="py-20 px-4 relative min-h-screen bg-[#f5f1f1]" style={{ scale, rotate }}>
+    <motion.section className="py-20 px-4 relative min-h-screen bg-[#f5f1f1]"
+     style={{ willChange: "transform", scale, rotate }}
+     >
    
       
       <div className="max-w-6xl mx-auto">
